@@ -1461,8 +1461,8 @@ void TemplatedVocabulary<TDescriptor,F>::saveToTextFile(const std::string &filen
 
 template<class TDescriptor, class F>
 	bool TemplatedVocabulary<TDescriptor,F>::loadFromBinaryFile(const std::string &filename) {
-  fstream f;
-  f.open(filename.c_str(), ios_base::in|ios::binary);
+  std::fstream f;
+  f.open(filename.c_str(), std::ios_base::in|std::ios::binary);
   unsigned int nb_nodes, size_node;
   f.read((char*)&nb_nodes, sizeof(nb_nodes));
   f.read((char*)&size_node, sizeof(size_node));
@@ -1508,8 +1508,8 @@ template<class TDescriptor, class F>
 
 template<class TDescriptor, class F>
 void TemplatedVocabulary<TDescriptor,F>::saveToBinaryFile(const std::string &filename) const {
-  fstream f;
-  f.open(filename.c_str(), ios_base::out|ios::binary);
+  std::fstream f;
+  f.open(filename.c_str(), std::ios_base::out|std::ios::binary);
   unsigned int nb_nodes = m_nodes.size();
   float _weight;
   unsigned int size_node = sizeof(m_nodes[0].parent) + F::L*sizeof(char) + sizeof(_weight) + sizeof(bool);
