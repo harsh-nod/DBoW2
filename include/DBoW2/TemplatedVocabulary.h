@@ -1477,14 +1477,13 @@ template<class TDescriptor, class F>
   m_nodes.clear();
   m_nodes.resize(nb_nodes+1);
   m_nodes[0].id = 0;
-  char buf[size_node]; int nid = 1;
+  char* buf = new char[size_node]; 
+  int nid = 1;
   while (!f.eof()) {
 	f.read(buf, size_node);
 	m_nodes[nid].id = nid;
-	// FIXME
 	const int* ptr=(int*)buf;
 	m_nodes[nid].parent = *ptr;
-	//m_nodes[nid].parent = *(const int*)buf;
 	m_nodes[m_nodes[nid].parent].children.push_back(nid);
 	m_nodes[nid].descriptor = cv::Mat(1, F::L, CV_8U);
 	memcpy(m_nodes[nid].descriptor.data, buf+4, F::L);
